@@ -24,7 +24,7 @@ class ConfigurationActivity : AppCompatActivity() {
         val widgetId = getWidgetId()
         if (widgetId == AppWidgetManager.INVALID_APPWIDGET_ID) finish()
 
-        updateView(this@ConfigurationActivity, widgetId)
+        setConfigValuesAndUpdateView(this@ConfigurationActivity, widgetId)
 
         goToWidget(widgetId)
 
@@ -35,14 +35,20 @@ class ConfigurationActivity : AppCompatActivity() {
             AppWidgetManager.EXTRA_APPWIDGET_ID,
             AppWidgetManager.INVALID_APPWIDGET_ID
         ) ?: AppWidgetManager.INVALID_APPWIDGET_ID
-
     }
 
-    private fun updateView(context: Context, appWidgetId: Int) {
+    private fun setConfigValuesAndUpdateView(context: Context, appWidgetId: Int) {
         RemoteViews(context.packageName, R.layout.layout_widget).also {
+            setConfigurationValue(it)
             appWidgetManager.updateAppWidget(appWidgetId, it)
         }
+    }
 
+    private fun setConfigurationValue(view: RemoteViews) {
+        view.apply {
+            setTextViewText(R.id.txt_widget, "야호~~~")
+            setImageViewResource(R.id.img_widget, R.drawable.t4)
+        }
     }
 
     private fun goToWidget(appWidgetId: Int) {
@@ -54,7 +60,5 @@ class ConfigurationActivity : AppCompatActivity() {
 
             finish()
         }
-
     }
-
 }
