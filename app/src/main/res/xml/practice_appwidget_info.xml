@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <appwidget-provider xmlns:android="http://schemas.android.com/apk/res/android"
-    android:initialLayout="@layout/grid_1_picture"
+    android:initialLayout="@layout/layout_widget"
     android:minWidth="@dimen/widgetMinWidth"
     android:minHeight="@dimen/widgetMinHeight"
     android:resizeMode="horizontal|vertical" />

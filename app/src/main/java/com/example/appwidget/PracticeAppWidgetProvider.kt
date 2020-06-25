@@ -1,9 +1,11 @@
 package com.example.appwidget
 
+import android.app.PendingIntent
 import android.appwidget.AppWidgetManager
 import android.appwidget.AppWidgetProvider
 import android.content.Context
 import android.content.Intent
+import android.widget.RemoteViews
 
 class PracticeAppWidgetProvider : AppWidgetProvider() {
 
@@ -21,6 +23,21 @@ class PracticeAppWidgetProvider : AppWidgetProvider() {
         appWidgetIds: IntArray?
     ) {
         super.onUpdate(context, appWidgetManager, appWidgetIds)
+
+        appWidgetIds!!.forEach { id ->
+
+            val pendingIntent = Intent(context, ExampleActivity::class.java).let { intent ->
+                PendingIntent.getActivity(context, 0, intent, 0)
+            }
+
+
+            val view = RemoteViews(context?.packageName, R.layout.layout_widget).apply {
+                setOnClickPendingIntent(R.id.img_1, pendingIntent)
+            }
+
+            appWidgetManager!!.updateAppWidget(id, view)
+
+        }
     }
 
 

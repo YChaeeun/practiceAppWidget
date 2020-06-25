@@ -17,6 +17,12 @@
             </intent-filter>
         </activity>
 
+        <activity
+            android:name=".ExampleActivity"
+            android:theme="@style/Theme.AppCompat.Transparent">
+
+        </activity>
+
         <receiver android:name=".PracticeAppWidgetProvider">
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
