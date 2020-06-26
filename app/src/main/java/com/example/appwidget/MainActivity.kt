@@ -3,10 +3,9 @@ package com.example.appwidget
 import android.os.Bundle
 import android.widget.AdapterViewFlipper
 import androidx.annotation.DrawableRes
-import androidx.appcompat.app.AppCompatActivity
 import kotlinx.android.synthetic.main.activity_main.*
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : PermissionActivity() {
 
     @DrawableRes
     var galleryId: ArrayList<Int> =
@@ -30,13 +29,6 @@ class MainActivity : AppCompatActivity() {
 
     }
 
-    private fun setListItem() {
-        for (i in 1..5) {
-            galleryId.add(resources.getIdentifier('t' + i.toString(), "drawble", this.packageName))
-        }
-    }
-
-
     private fun setViewFlip() {
         af = avf_container.apply {
             adapter = GalleryAdapter(this@MainActivity, galleryId)
@@ -55,7 +47,8 @@ class MainActivity : AppCompatActivity() {
         }
 
         btn_toggle.setOnClickListener {
-            if (btn_toggle.isChecked) af.startFlipping() else af.stopFlipping()
+            //if (btn_toggle.isChecked) af.startFlipping() else af.stopFlipping()
+            openMediaStore()
         }
     }
 
