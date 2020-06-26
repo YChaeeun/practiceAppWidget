@@ -28,7 +28,7 @@ abstract class PermissionActivity : AppCompatActivity() {
         when (requestCode) {
             READ_EXTERNAL_STORAGE_REQUEST -> {
                 if (grantResults.isNotEmpty() && grantResults[0] == PermissionChecker.PERMISSION_GRANTED) {  // permission granted
-                    showImages()
+                    //showImages()
                 } else { // permission denied
                     val showRationale =
                         ActivityCompat.shouldShowRequestPermissionRationale(
@@ -51,13 +51,6 @@ abstract class PermissionActivity : AppCompatActivity() {
         }
     }
 
-    fun openMediaStore() {
-        if (haveStoragePermission()) {
-            showImages()
-        } else {
-            requestPermission()
-        }
-    }
 
     private fun goToSettings() {
         Intent(
@@ -72,14 +65,14 @@ abstract class PermissionActivity : AppCompatActivity() {
     }
 
     // does app still have permission?
-    private fun haveStoragePermission() =
+    fun haveStoragePermission() =
         ContextCompat.checkSelfPermission(
             this,
             Manifest.permission.READ_EXTERNAL_STORAGE
         ) == PermissionChecker.PERMISSION_GRANTED
 
     // if not, request permission
-    private fun requestPermission() {
+    fun requestPermission() {
         if (!haveStoragePermission()) {
             val permissions = arrayOf(
                 Manifest.permission.READ_EXTERNAL_STORAGE,
@@ -90,10 +83,6 @@ abstract class PermissionActivity : AppCompatActivity() {
                 READ_EXTERNAL_STORAGE_REQUEST
             )
         }
-    }
-
-    private fun showImages() {
-        loadImage()
     }
 
     private fun loadImage() {

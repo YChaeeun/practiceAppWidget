@@ -54,7 +54,14 @@ class MainActivity : PermissionActivity() {
         btn_toggle.setOnClickListener {
             //if (btn_toggle.isChecked) af.startFlipping() else af.stopFlipping()
             openMediaStore()
+        }
+    }
+
+    private fun openMediaStore() {
+        if (haveStoragePermission()) {
             pickImages()
+        } else {
+            requestPermission()
         }
     }
 
@@ -95,8 +102,14 @@ class MainActivity : PermissionActivity() {
             }
 
             Toast.makeText(this@MainActivity, uriList.toString(), Toast.LENGTH_LONG).show()
+
+            showImages(uriList[0])
         }
 
+    }
+
+    private fun showImages(uri: Uri) {
+        img_selected.setImageURI(uri)
     }
 
 
